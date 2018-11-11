@@ -7,15 +7,20 @@ class VideoList extends React.Component {
   }
   
   render () {
+    var videoList = [];
+    if (this.props.videos) {
+      for (var i = 0; i < this.props.videos.length; i++) {
+        videoList.push(<VideoListEntry video={this.props.videos[i]} listEntryClickFn={this.props.listEntryClickFn} key={i}/>);
+      }
+    }
     return (<div className="video-list">
-      {this.props.videos.map((video, index) => (
-        <VideoListEntry video={video} key={index}/>
-    
-      ))}
+      {videoList}
 
     </div>);
-  }
-
+  
+  console.log(this.props)
+  
+}
   static propTypes () {
     videos: React.PropTypes.array.isRequired;
   } 
