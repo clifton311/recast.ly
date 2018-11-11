@@ -8,7 +8,7 @@ var options = {
   max: 5
 };
 window.searchYouTube(options, (data) => {
-  videos = data;
+  videos = data; 
   ReactDOM.render(<App videos={videos} search={window.searchYouTube}/>, document.getElementById('app'));
 });
 
