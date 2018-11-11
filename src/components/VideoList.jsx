@@ -18,9 +18,7 @@ class VideoList extends React.Component {
 
     </div>);
   
-  console.log(this.props)
-  
-}
+  }
   static propTypes () {
     videos: React.PropTypes.array.isRequired;
   } 
