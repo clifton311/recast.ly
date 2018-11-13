@@ -3,8 +3,9 @@ class App extends React.Component {
     super (props);
 
     this.state = {
-      currentVideo: props.videos[0],
-      videoList: props.videos
+      currentVideo: props.videos ? props.videos[0] : window.exampleVideoData[0],
+      videoList: props.videos,
+      query: 'Pokemon Battles'
     };
   }
 
@@ -13,6 +14,7 @@ class App extends React.Component {
       currentVideo: video
     });
   }
+
   render () {
 
     return (
@@ -33,6 +35,27 @@ class App extends React.Component {
         </div>
       </div>
     );
+  }
+
+
+  componentDidMount () {
+    this.getVideos();
+  }
+
+  getVideos(q) {
+    var options = {
+      key : window.YOUTUBE_API_KEY,
+      max: 10,
+      query: q ? q : this.state.query
+    };
+    
+    this.props.searchYouTube(options, (data) => {
+      this.setState({
+        currentVideo : data[0],
+        videoList : data,
+        query: q
+      });
+    });
   }
 }
 

@@ -1,14 +1,37 @@
 // TODO: Render the `App` component to the DOM
-console.log(window.exampleVideoData);
-var videos = [];
+console.log(window.searchYouTube);
+var videos = [{
+  kind: '',
+  etag: '',
+  id: {
+    kind: '',
+    videoId: ''
+  },
+  snippet: {
+    publishedAt: '',
+    channelId: '',
+    title: '',
+    description: '',
+    thumbnails: {
+      default: {
+        url: '',
+        width: 120,
+        height: 90
+      },
+      medium: {
+        url: '',
+        width: 320,
+        height: 180
+      },
+      high: {
+        url: '',
+        width: 480,
+        height: 360
+      }
+    },
+    channelTitle: '',
+    liveBroadcastContent: ''
+  }
+}];
 
-var options = {
-  key: window.YOUTUBE_API_KEY,
-  query: 'john oliver',
-  max: 5
-};
-window.searchYouTube(options, (data) => {
-  videos = data; 
-  ReactDOM.render(<App videos={videos} search={window.searchYouTube}/>, document.getElementById('app'));
-});
-
+ReactDOM.render(<App videos={videos} searchYouTube={window.searchYouTube}/>, document.getElementById('app'));
