@@ -31,9 +31,10 @@ describe ('Search', function() {
       videoEntryTitleElements.forEach((videoEntryTitle, i) => {
         expect(videoEntryTitle.innerHTML).to.equal(fakeVideoData[i].snippet.title);
       });
-
+      
       var searchInputElement = findRenderedDOMComponentWithClass(app, 'form-control');
       Simulate.change(searchInputElement, {target: {value: 'React tutorial'}});
+      
 
       var newVideoEntryTitleElements = scryRenderedDOMComponentsWithClass(app, 'video-list-entry-title');
       newVideoEntryTitleElements.forEach((videoEntryTitle, i) => {

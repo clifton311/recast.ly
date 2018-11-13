@@ -5,8 +5,30 @@ class App extends React.Component {
     this.state = {
       currentVideo: props.videos ? props.videos[0] : window.exampleVideoData[0],
       videoList: props.videos,
-      query: 'Pokemon Battles'
+      query: 'Stan Lee',
+      lastSearch: Date.now()
     };
+    this.firstSearch = true;
+  }
+
+  searchTextChange(event) {
+    if ((Date.now() >= this.state.lastSearch + 500) || this.firstSearch) {
+      this.firstSearch = false;
+      var query = event.target.value ;
+      if (query !== this.state.query) {
+        this.getVideos(query);
+      }
+    }
+  }
+
+  searchButtonClick(event) {
+    if ((Date.now() >= this.state.lastSearch + 500) || this.firstSearch) {
+      this.firstSearch = false;
+      var query = event.target.parentNode.children[0].value ;
+      if (query !== this.state.query) {
+        this.getVideos(query);
+      }
+    }
   }
 
   videoListEntryClick (video) {
@@ -21,7 +43,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            <Search searchEvent={this.searchTextChange.bind(this)} searchClickEvent={this.searchButtonClick.bind(this)}/>
           </div>
         </nav>
         <div className="row">
@@ -53,7 +75,8 @@ class App extends React.Component {
       this.setState({
         currentVideo: data[0],
         videoList: data,
-        query: q
+        query: q,
+        lastSearch: Date.now()
       });
     });
   }
