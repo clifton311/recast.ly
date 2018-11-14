@@ -1,5 +1,4 @@
 // TODO: Render the `App` component to the DOM
-console.log(window.searchYouTube);
 var videos = [{
   kind: '',
   etag: '',
@@ -34,4 +33,4 @@ var videos = [{
   }
 }];
 
-ReactDOM.render(<App videos={videos} searchYouTube={window.searchYouTube}/>, document.getElementById('app'));
+ReactDOM.render(<App videos={videos} searchYouTube={window.searchYouTube} getVideo={window.getYouTubeVideoDetails}/>, document.getElementById('app'));

@@ -8,6 +8,7 @@ class App extends React.Component {
       query: 'Stan Lee',
       lastSearch: Date.now()
     };
+
     this.firstSearch = true;
   }
 
@@ -70,15 +71,21 @@ class App extends React.Component {
       max: 10,
       query: q ? q : this.state.query
     };
-    
+
+    //use successCB to get the new videolist and video details
+
     this.props.searchYouTube(options, (data) => {
-      this.setState({
-        currentVideo: data[0],
-        videoList: data,
-        query: q,
-        lastSearch: Date.now()
-      });
+      options.videoID = data[0].id.videoId;
+        this.props.getVideo(options, (videoData) => {
+          this.setState({
+            currentVideo: videoData,
+            videoList: data,
+            query: q,
+            lastSearch: Date.now()
+          });
+        });
     });
+
   }
 }
 
